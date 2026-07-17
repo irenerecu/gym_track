@@ -1,0 +1,53 @@
+[
+    {
+        "rutina": "Rutina A: Torso",
+        "fecha": "5/7/2026",
+        "timestamp": 1783226992703.0,
+        "ejercicios": [
+            {
+                "nombre": "Press de Banca (Barra)",
+                "series": [
+                    {
+                        "kg": 0.0,
+                        "reps": 0,
+                        "hecha": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "rutina": "Rutina A: Torso",
+        "fecha": "09/07/2026",
+        "timestamp": 1783555200000.0,
+        "ejercicios": [
+            {
+                "nombre": "Press de Banca (Barra)",
+                "series": [
+                    {
+                        "kg": 0.0,
+                        "reps": 0,
+                        "hecha": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "rutina": "Rutina A: Torso",
+        "fecha": "09/07/2026",
+        "timestamp": 1783555200000.0,
+        "ejercicios": [
+            {
+                "nombre": "Press de Banca (Barra)",
+                "series": [
+                    {
+                        "kg": 1.0,
+                        "reps": 2,
+                        "hecha": false
+                    }
+                ]
+            }
+        ]
+    }
+]
