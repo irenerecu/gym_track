@@ -1,8 +1,15 @@
-cat << 'EOF' > .gitignore
+# Entorno virtual de Python
 venv/
-ENV/
-env/
+.venv/
 __pycache__/
 *.pyc
+
+# Base de datos local (tus entrenamientos se quedan en tu Mac)
+glowlift.db
+entrenamientos_log.json
+
+# Archivos de configuración con contraseñas
+.env
+
+# Archivos del sistema Mac
 .DS_Store
-EOF

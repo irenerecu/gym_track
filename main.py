@@ -9,6 +9,11 @@ import sqlite3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+import uvicorn
+
+# Cargamos el archivo .env
+load_dotenv()
 
 app = FastAPI()
 
@@ -208,7 +213,7 @@ def enviar_reporte_email():
     
     try:
         REMITENTE = "irenerecu@gmail.com" 
-        PASSWORD = "zodr eiuo mbtn ewej" 
+        PASSWORD = "dkme rvhl cvxr sdrt" 
         DESTINATARIO = "irenerecu@gmail.com" 
 
         cuerpo_html = """
@@ -272,3 +277,8 @@ def enviar_reporte_email():
     
     except Exception as e:
         return JSONResponse(status_code=500, content={"message": f"Error al enviar correo: {str(e)}"})
+    
+  if __name__ == "__main__":
+    # Lee el puerto que asigna el servidor (Render) o usa el 8000 por defecto en local
+    puerto = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=puerto)
