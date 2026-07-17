@@ -228,15 +228,134 @@
             background-color: #7dd3fc;
             transform: translateY(-1px);
         }
+
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px; /* Escondida por defecto a la izquierda */
+            width: 280px;
+            height: 100%;
+            background-color: var(--bg-tarjeta);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+
+        /* Clase que activa la barra (se añade con JS) */
+        .sidebar.activo {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--color-acento);
+        }
+
+        .btn-cerrar-sidebar {
+            background: none;
+            border: none;
+            color: var(--texto-secundario);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .btn-cerrar-sidebar:hover {
+            color: var(--color-peligro);
+        }
+
+        .sidebar-contenido {
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-contenido a {
+            color: var(--texto-principal);
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-contenido a i {
+            color: var(--color-acento);
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-contenido a:hover {
+            background-color: var(--bg-input);
+        }
+
+        /* Fondo oscuro translúcido */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+            z-index: 999;
+            display: none; /* Escondido por defecto */
+        }
+
+        .sidebar-overlay.activo {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="contenedor">
-        <header>
-            <h1>Glow<span>Lift</span></h1>
-            <input type="date" id="fechaEntrenamiento" class="fecha-actual" style="border: 1px solid #334155; padding: 6px 12px; background: var(--bg-tarjeta); color: var(--texto-secundario); font-weight: 600; font-size: 13px; width: auto; font-family: inherit;">
-        </header>
+        <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h2>GlowMenu</h2>
+        <button class="btn-cerrar-sidebar" onclick="toggleSidebar()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <div class="sidebar-contenido">
+        <a href="#" onclick="toggleSidebar()"><i class="fa-solid fa-dumbbell"></i> Diario de Entrenamiento</a>
+        <a href="#" onclick="alert('Próximamente: observaciones')"><i class="fa-solid fa-apple-whole"></i> Observaciones </a>
+        <a href="#" onclick="toggleSidebar()"><i class="fa-solid fa-gear"></i> Ajustes</a>
+    </div>
+</div>
+
+<!-- Fondo oscuro que cubre la pantalla al abrir el menú -->
+<div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="contenedor">
+    <header>
+        <!-- NUEVO: Icono de 3 rayas a la izquierda -->
+        <button class="btn-menu" onclick="toggleSidebar()" style="background: none; border: none; color: var(--texto-principal); font-size: 22px; cursor: pointer; padding: 4px;">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        
+        <h1 style="margin-left: 10px; flex-grow: 1;">Glow<span>Lift</span></h1>
+        
+        <input type="date" id="fechaEntrenamiento" class="fecha-actual" style="border: 1px solid #334155; padding: 6px 12px; background: var(--bg-tarjeta); color: var(--texto-secundario); font-weight: 600; font-size: 13px; width: auto; font-family: inherit;">
+    </header>
 
         <!-- Registro de entrenamiento activo -->
         <div class="tarjeta-sesion">
@@ -272,6 +391,15 @@
     </div>
 
     <script>
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('activo');
+            overlay.classList.toggle('activo');
+        }
+        
         // Pone la fecha de hoy por defecto en formato AAAA-MM-DD que requiere el input date
         const hoy = new Date();
         const año = hoy.getFullYear();
